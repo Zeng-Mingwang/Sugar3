@@ -12,7 +12,7 @@ class Config:
     
     # 会话配置
     PERMANENT_SESSION_LIFETIME = 1800  # 30分钟
-    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = os.environ.get('FLASK_ENV') == 'production'  # 只在生产环境启用
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'Lax'
     
