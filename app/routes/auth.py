@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.models import User
 from app import db
+import logging
 
 bp = Blueprint('auth', __name__)
 
@@ -41,7 +42,12 @@ def login():
             flash('用户名或密码错误')
             return redirect(url_for('auth.login'))
         
-        login_user(user)
+        current_app.logger.info(f'用户 {username} 登录成功')
+        current_app.logger.info(f'Session 配置: SECURE={current_app.config["SESSION_COOKIE_SECURE"]}, '
+                              f'HTTPONLY={current_app.config["SESSION_COOKIE_HTTPONLY"]}, '
+                              f'SAMESITE={current_app.config["SESSION_COOKIE_SAMESITE"]}')
+        
+        login_user(user, remember=True)
         return redirect(url_for('main.index'))
     
     return render_template('auth/login.html')
