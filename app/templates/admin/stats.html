@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}数据统计{% endblock %}
+
+{% block styles %}
+<style>
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: all 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.2);
+}
+.card-header {
+    background: linear-gradient(45deg, #4e73df, #36b9cc);
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding: 1rem 1.25rem;
+}
+.card-header h6 {
+    color: white !important;
+    font-size: 1rem;
+    margin: 0;
+}
+.card-body {
+    padding: 1.25rem;
+}
+.dashboard-title {
+    color: #5a5c69;
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+.display-6 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #5a5c69;
+}
+.text-muted {
+    color: #858796 !important;
+}
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+.tooltip-inner {
+    max-width: 300px;
+    padding: 0.5rem 1rem;
+    background-color: #4e73df;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    text-align: left;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="dashboard-title">数据统计</h1>
+        <a href="{{ url_for('admin.index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> 返回首页
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card" data-toggle="tooltip" data-placement="top" title="系统中注册的所有用户总数">
+                <div class="card-body">
+                    <h5 class="card-title">用户总数</h5>
+                    <p class="card-text display-6">{{ stats.total_users }}</p>
+                    <small class="text-muted">今日新增: {{ stats.today_users }}</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card" data-toggle="tooltip" data-placement="top" title="系统中所有商品的总数">
+                <div class="card-body">
+                    <h5 class="card-title">商品总数</h5>
+                    <p class="card-text display-6">{{ stats.total_products }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card" data-toggle="tooltip" data-placement="top" title="所有已购买商品的总收入，计算公式：所有已购买商品的价格 × 数量之和">
+                <div class="card-body">
+                    <h5 class="card-title">总收入</h5>
+                    <p class="card-text display-6">¥{{ "%.2f"|format(stats.total_revenue) }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card" data-toggle="tooltip" data-placement="top" title="推荐产品的转化率，计算公式：推荐产品购买次数 ÷ 推荐产品查看次数 × 100%">
+                <div class="card-body">
+                    <h5 class="card-title">转化率</h5>
+                    <p class="card-text display-6">{{ stats.conversion_rate }}%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6>推荐产品数据</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr data-toggle="tooltip" data-placement="left" title="用户点击推荐产品的次数">
+                                <td>点击次数</td>
+                                <td>{{ stats.recommended_clicks }}</td>
+                            </tr>
+                            <tr data-toggle="tooltip" data-placement="left" title="用户查看推荐产品的次数">
+                                <td>查看次数</td>
+                                <td>{{ stats.recommended_views }}</td>
+                            </tr>
+                            <tr data-toggle="tooltip" data-placement="left" title="用户查看推荐产品的平均停留时间（秒）">
+                                <td>平均停留时间</td>
+                                <td>{{ stats.avg_duration }}秒</td>
+                            </tr>
+                            <tr data-toggle="tooltip" data-placement="left" title="用户购买推荐产品的次数">
+                                <td>购买次数</td>
+                                <td>{{ stats.recommended_purchases }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6>推荐产品收入</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr data-toggle="tooltip" data-placement="left" title="推荐产品的总收入，计算公式：推荐产品（用户点击过的）的价格 × 数量之和">
+                                <td>推荐产品收入</td>
+                                <td>¥{{ "%.2f"|format(stats.recommended_revenue) }}</td>
+                            </tr>
+                            <tr data-toggle="tooltip" data-placement="left" title="推荐产品收入占总收入的百分比，计算公式：推荐产品收入 ÷ 总收入 × 100%">
+                                <td>收入占比</td>
+                                <td>{{ stats.recommended_revenue_ratio }}%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // 初始化所有工具提示
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+{% endblock %} 

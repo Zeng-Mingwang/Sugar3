@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block hero %}
+<section class="hero-section">
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/icon.png') }}" alt="三分糖" class="hero-icon">
+        <h1 class="hero-title">三分糖，刚刚好</h1>
+        <p class="hero-subtitle">精心调配，用心制作，每一杯都是独特的味蕾体验</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-100">
+            <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">
+                    <small class="text-muted">类别: {{ product.category }}</small>
+                </p>
+                <p class="card-text">
+                    <strong>¥{{ "%.2f"|format(product.price) }}</strong>
+                </p>
+                <div class="action-buttons">
+                    <a href="{{ url_for('main.product_detail', product_id=product.id) }}" class="btn-img">
+                        <img src="{{ url_for('static', filename='images/查看详情.png') }}" alt="查看详情">
+                        <span class="btn-text">查看详情</span>
+                    </a>
+                    {% if current_user.is_authenticated %}
+                    <button class="btn-img add-to-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                        <img src="{{ url_for('static', filename='images/加入购物车.png') }}" alt="加入购物车">
+                        <span class="btn-text">加入购物车</span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('.add-to-cart').off('click').on('click', function() {
+        const $btn = $(this);
+        const productId = $btn.data('product-id');
+        const productName = $btn.data('product-name');
+        
+        // 禁用按钮防止重复点击
+        $btn.prop('disabled', true);
+        
+        $.post('/add_to_cart', {
+            product_id: productId,
+            quantity: 1
+        })
+        .done(function(response) {
+            if (response.status === 'success') {
+                showToast(productName + ' 已添加到购物车');
+            }
+        })
+        .fail(function() {
+            showToast('添加失败，请重试');
+        })
+        .always(function() {
+            // 1秒后重新启用按钮
+            setTimeout(() => {
+                $btn.prop('disabled', false);
+            }, 1000);
+        });
+    });
+});
+</script>
+{% endblock %} 

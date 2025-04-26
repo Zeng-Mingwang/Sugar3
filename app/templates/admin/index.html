@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}管理后台{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <h1 class="dashboard-title mb-4">管理后台</h1>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up display-1 text-primary mb-3"></i>
+                    <h3 class="card-title">数据统计</h3>
+                    <p class="card-text">查看网站运营数据、用户行为和销售统计</p>
+                    <a href="{{ url_for('admin.stats') }}" class="btn btn-primary">进入统计</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-box-seam display-1 text-success mb-3"></i>
+                    <h3 class="card-title">商品管理</h3>
+                    <p class="card-text">管理商品信息、添加新商品、编辑商品详情</p>
+                    <a href="{{ url_for('admin.products') }}" class="btn btn-success">管理商品</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-people display-1 text-info mb-3"></i>
+                    <h3 class="card-title">用户管理</h3>
+                    <p class="card-text">查看用户信息、管理用户权限</p>
+                    <a href="{{ url_for('admin.users') }}" class="btn btn-info">管理用户</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

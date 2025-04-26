@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}添加商品{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">添加商品</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form id="addProductForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="name">商品名称</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="category">分类</label>
+                            <input type="text" class="form-control" id="category" name="category" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price">价格(元)</label>
+                            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="image_url">图片URL</label>
+                            <input type="text" class="form-control" id="image_url" name="image_url">
+                            <small class="form-text text-muted">可选，如果不填写将使用默认图片</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description">商品描述</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="features">产品特点</label>
+                            <textarea class="form-control" id="features" name="features" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="flavor_profile">风味特征</label>
+                            <textarea class="form-control" id="flavor_profile" name="flavor_profile" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="texture">口感描述</label>
+                            <textarea class="form-control" id="texture" name="texture" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="aftertaste">回味</label>
+                            <textarea class="form-control" id="aftertaste" name="aftertaste" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="mood_trigger">心情触发</label>
+                            <textarea class="form-control" id="mood_trigger" name="mood_trigger" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="drinking_scenario">饮用场景</label>
+                            <textarea class="form-control" id="drinking_scenario" name="drinking_scenario" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="flavor_association">风味联想</label>
+                            <textarea class="form-control" id="flavor_association" name="flavor_association" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">添加商品</button>
+                    <a href="{{ url_for('admin.products') }}" class="btn btn-secondary">返回</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('#addProductForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: $('#name').val(),
+            category: $('#category').val(),
+            price: $('#price').val(),
+            description: $('#description').val(),
+            image_url: $('#image_url').val(),
+            features: $('#features').val(),
+            flavor_profile: $('#flavor_profile').val(),
+            texture: $('#texture').val(),
+            aftertaste: $('#aftertaste').val(),
+            mood_trigger: $('#mood_trigger').val(),
+            drinking_scenario: $('#drinking_scenario').val(),
+            flavor_association: $('#flavor_association').val()
+        };
+
+        $.ajax({
+            url: '/admin/product/add',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                alert('商品添加成功！');
+                window.location.href = '/admin/products';
+            },
+            error: function(xhr) {
+                alert('添加失败：' + xhr.responseJSON.error);
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

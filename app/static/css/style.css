@@ -1,0 +1,447 @@
+/* 全局样式 */
+body {
+    background-color: #f8f9fa;
+}
+
+/* 导航栏样式 */
+.navbar {
+    box-shadow: none;
+    background-color: transparent !important;
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    color: #0a5c36 !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.cart-icon {
+    color: #0a5c36;
+    font-size: 1.5rem;
+}
+
+.nav-login-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-text {
+    color: #0a5c36;
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-name {
+    color: #0a5c36;
+    font-weight: 500;
+    margin: 0;
+}
+
+.btn-logout {
+    color: #0a5c36;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid #0a5c36;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #0a5c36;
+    color: white;
+}
+
+.btn-login {
+    background-color: #0a5c36;
+    border-color: #0a5c36;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #084429;
+    border-color: #084429;
+    color: white;
+}
+
+/* 首页主标题样式 */
+.hero-section {
+    background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);
+    padding: 100px 0;
+    text-align: center;
+    margin-top: -76px;
+    padding-top: 150px;
+}
+
+.hero-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    color: #0a5c36;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    color: #2e7d32;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 卡片样式 */
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* 商品价格样式 */
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+/* 表单样式 */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* 购物车表格样式 */
+.table th {
+    border-top: none;
+}
+
+/* 管理员仪表板卡片样式 */
+.card .display-4 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #007bff;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+    
+    .card .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* 按钮图片样式 */
+.btn-img {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: left;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-img:hover {
+    transform: scale(1.05);
+}
+
+.btn-img img {
+    height: 36px;
+    width: auto;
+    margin-bottom: 0.5rem;
+}
+
+.btn-img .btn-text {
+    color: #0a5c36;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+/* 提示消息样式 */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+}
+
+.toast {
+    background-color: rgba(10, 92, 54, 0.95);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    min-width: 250px;
+}
+
+.toast.show {
+    display: block;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* 商品详情页样式 */
+.product-info {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.product-title {
+    color: #0a5c36;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.product-category {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-price {
+    color: #e53935;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.product-description {
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.product-features-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    border-radius: 12px;
+}
+
+.feature-title {
+    color: #0a5c36;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-title i {
+    font-size: 1.4rem;
+}
+
+.feature-content {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.feature-content:last-child {
+    margin-bottom: 0;
+}
+
+/* 推荐区域样式 */
+.recommendation-section {
+    background: linear-gradient(135deg, #0a5c36 0%, #2e7d32 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.recommendation-section i {
+    color: #fff;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+}
+
+.recommendation-section + .row .card {
+    border: 1px solid rgba(10, 92, 54, 0.1);
+    transition: all 0.3s ease;
+}
+
+.recommendation-section + .row .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(10, 92, 54, 0.15);
+    border-color: #0a5c36;
+}
+
+.recommendation-section + .row .card-title {
+    color: #0a5c36;
+    font-weight: 600;
+}
+
+.recommendation-section + .row .card-text strong {
+    color: #e53935;
+    font-size: 1.2rem;
+}
+
+/* 管理后台样式 */
+.admin-dashboard {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.dashboard-title {
+    color: #0a5c36;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.admin-actions {
+    margin-bottom: 2rem;
+}
+
+.product-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.btn-admin {
+    background: #0a5c36;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+    background: #084429;
+    color: white;
+}
+
+.btn-admin i {
+    font-size: 1.1rem;
+}
+
+/* 表格样式优化 */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background: #f8f9fa;
+    color: #0a5c36;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* 模态框样式优化 */
+.modal-content {
+    border-radius: 12px;
+}
+
+.modal-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    color: #0a5c36;
+    font-weight: 600;
+}
+
+.form-label {
+    color: #495057;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #0a5c36;
+    box-shadow: 0 0 0 0.2rem rgba(10, 92, 54, 0.25);
+} 

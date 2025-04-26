@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}编辑商品{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="dashboard-title">编辑商品</h1>
+        <a href="{{ url_for('admin.products') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> 返回列表
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form id="editProductForm">
+                <input type="hidden" name="id" value="{{ product.id }}">
+                <div class="mb-3">
+                    <label class="form-label">商品名称</label>
+                    <input type="text" class="form-control" name="name" value="{{ product.name }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">商品类别</label>
+                    <input type="text" class="form-control" name="category" value="{{ product.category }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">价格</label>
+                    <input type="number" class="form-control" name="price" step="0.01" value="{{ product.price }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">商品描述</label>
+                    <textarea class="form-control" name="description" rows="3" required>{{ product.description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">图片URL</label>
+                    <input type="text" class="form-control" name="image_url" value="{{ product.image_url }}">
+                    <small class="form-text text-muted">可选，如果不填写将使用默认图片</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">产品特点</label>
+                    <textarea class="form-control" name="product_features" rows="2">{{ product.product_features }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">风味描述</label>
+                    <textarea class="form-control" name="flavor_profile" rows="2">{{ product.flavor_profile }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">口感体验</label>
+                    <textarea class="form-control" name="texture_description" rows="2">{{ product.texture_description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">回味感受</label>
+                    <textarea class="form-control" name="after_taste" rows="2">{{ product.after_taste }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">情绪触发</label>
+                    <textarea class="form-control" name="mood_trigger" rows="2">{{ product.mood_trigger }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">饮用场景</label>
+                    <textarea class="form-control" name="drinking_scenario" rows="2">{{ product.drinking_scenario }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">味道联想</label>
+                    <textarea class="form-control" name="flavor_association" rows="2">{{ product.flavor_association }}</textarea>
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-secondary me-2" onclick="history.back()">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('#editProductForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const productId = formData.get('id');
+        
+        fetch(`/admin/product/${productId}`, {
+            method: 'PUT',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('更新成功');
+                window.location.href = '{{ url_for("admin.products") }}';
+            } else {
+                alert('更新失败：' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('更新失败，请重试');
+            console.error('Error:', error);
+        });
+    });
+});
+</script>
+{% endblock %} 
