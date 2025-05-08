@@ -19,22 +19,27 @@ def product_detail(product_id):
     product = Product.query.get_or_404(product_id)
     is_recommend = request.args.get('is_recommend', 'false').lower() == 'true'
     
+    # 在路由函数内初始化推荐系统
+    recommender = Recommender()
+    # 获取推荐产品
+    recommended_products = recommender.get_recommendations(product_id)
+    
     # 记录用户浏览行为
     if current_user.is_authenticated:
+        # 获取推荐产品的ID列表
+        recommended_ids = [str(p.id) for p in recommended_products]
+        recommended_ids_str = ','.join(recommended_ids)
+        
         behavior = UserBehavior(
             user_id=current_user.id,
             product_id=product_id,
             behavior_type='view',
             created_at=datetime.utcnow(),
-            is_recommended=is_recommend
+            is_recommended=is_recommend,
+            recommended_product_ids=recommended_ids_str
         )
         db.session.add(behavior)
         db.session.commit()
-
-    # 在路由函数内初始化推荐系统
-    recommender = Recommender()
-    # 获取推荐产品
-    recommended_products = recommender.get_recommendations(product_id)
     
     return render_template('product_detail.html', 
                          product=product, 

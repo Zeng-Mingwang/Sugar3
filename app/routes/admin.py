@@ -251,7 +251,6 @@ def users():
         
         # 计算转化率
         conversion_rate = (recommended_purchases / recommended_views * 100) if recommended_views > 0 else 0
-        print(conversion_rate)
         
         # 计算总收入（包括已结算的购物车项）
         total_revenue = db.session.query(
@@ -280,7 +279,7 @@ def users():
         
         # 计算推荐产品收入占比
         recommended_revenue_ratio = (recommended_revenue / total_revenue * 100) if total_revenue > 0 else 0
-        
+
         user_stats[user.id] = {
             'recommended_clicks': recommended_clicks,
             'recommended_views': recommended_views,
@@ -320,7 +319,8 @@ def export_users():
             'behavior_type': behavior.behavior_type,
             'created_at': behavior.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             'duration': behavior.duration,
-            'is_recommended': behavior.is_recommended
+            'is_recommended': behavior.is_recommended,
+            'recommended_product_ids': behavior.recommended_product_ids
         })
     
     # 创建JSON文件
