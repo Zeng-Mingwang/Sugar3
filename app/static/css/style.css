@@ -444,4 +444,127 @@ body {
 .form-control:focus {
     border-color: #0a5c36;
     box-shadow: 0 0 0 0.2rem rgba(10, 92, 54, 0.25);
+}
+
+/* 推荐产品侧边栏样式 */
+.recommendation-sidebar {
+    position: sticky;
+    top: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.recommendation-sidebar .recommendation-section {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    margin: -1rem -1rem 1rem -1rem;
+    border-radius: 12px 12px 0 0;
+}
+
+.recommended-products {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.recommended-products::-webkit-scrollbar {
+    width: 4px;
+}
+
+.recommended-products::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 2px;
+}
+
+.recommended-products::-webkit-scrollbar-thumb {
+    background: #0a5c36;
+    border-radius: 2px;
+}
+
+.recommended-product-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(10, 92, 54, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-height: 100px;
+    padding: 0.5rem 0.7rem;
+}
+
+.recommended-product-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-right: 0.8rem;
+}
+
+.recommended-product-card .card-body {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.recommended-product-card .product-info {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0.3rem;
+    padding: 0;
+}
+
+.recommended-product-card .card-title {
+    font-size: 1rem;
+    color: #0a5c36;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recommended-product-card .card-text {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.recommended-product-card .card-text strong {
+    color: #e53935;
+    font-size: 1.05rem;
+}
+
+.recommended-product-card .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+.recommended-product-card .btn-img {
+    flex: 1;
+    padding: 0.3rem 0.1rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.recommended-product-card .btn-img img {
+    width: 28px;
+    height: 28px;
+    margin-right: 0;
+    margin-bottom: 0;
 } 

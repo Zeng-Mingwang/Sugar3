@@ -4,175 +4,174 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-5">
-        <img src="{{ product.image_url }}" class="img-fluid rounded" alt="{{ product.name }}">
-    </div>
-    <div class="col-md-7">
-        <div class="product-info">
-            <h1 class="product-title">{{ product.name }}</h1>
-            <p class="product-category">类别: {{ product.category }}</p>
-            <h3 class="product-price">¥{{ "%.2f"|format(product.price) }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            {% if current_user.is_authenticated %}
-            <button class="btn-img add-to-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-recommended="{{ is_recommend }}">
-                <img src="{{ url_for('static', filename='images/加入购物车.png') }}" alt="加入购物车">
-                <span class="btn-text">加入购物车</span>
-            </button>
-            {% endif %}
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{ product.image_url }}" class="img-fluid rounded" alt="{{ product.name }}">
+            </div>
+            <div class="col-md-7">
+                <div class="product-info">
+                    <h1 class="product-title">{{ product.name }}</h1>
+                    <p class="product-category">类别: {{ product.category }}</p>
+                    <h3 class="product-price">¥{{ "%.2f"|format(product.price) }}</h3>
+                    <p class="product-description">{{ product.description }}</p>
+                    {% if current_user.is_authenticated %}
+                    <button class="btn-img add-to-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-recommended="{{ is_recommend }}">
+                        <img src="{{ url_for('static', filename='images/加入购物车.png') }}" alt="加入购物车">
+                        <span class="btn-text">加入购物车</span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="product-features-section">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if product.product_features %}
+                    <div class="feature-title">
+                        <i class="bi bi-stars"></i>
+                        产品特点
+                    </div>
+                    <p class="feature-content">{{ product.product_features }}</p>
+                    {% endif %}
+
+                    {% if product.flavor_profile %}
+                    <div class="feature-title">
+                        <i class="bi bi-flower1"></i>
+                        风味描述
+                    </div>
+                    <p class="feature-content">{{ product.flavor_profile }}</p>
+                    {% endif %}
+
+                    {% if product.texture_description %}
+                    <div class="feature-title">
+                        <i class="bi bi-droplet"></i>
+                        口感体验
+                    </div>
+                    <p class="feature-content">{{ product.texture_description }}</p>
+                    {% endif %}
+
+                    {% if product.objective_analysis %}
+                    <div class="feature-title">
+                        <i class="bi bi-graph-up"></i>
+                        客观参数分析
+                    </div>
+                    <p class="feature-content">{{ product.objective_analysis }}</p>
+                    {% endif %}
+
+                    {% if product.drinking_suggestions %}
+                    <div class="feature-title">
+                        <i class="bi bi-cup-straw"></i>
+                        科学饮用建议
+                    </div>
+                    <p class="feature-content">{{ product.drinking_suggestions }}</p>
+                    {% endif %}
+
+                    {% if product.ingredients %}
+                    <div class="feature-title">
+                        <i class="bi bi-list-check"></i>
+                        配料表
+                    </div>
+                    <p class="feature-content">{{ product.ingredients }}</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    {% if product.after_taste %}
+                    <div class="feature-title">
+                        <i class="bi bi-heart"></i>
+                        回味感受
+                    </div>
+                    <p class="feature-content">{{ product.after_taste }}</p>
+                    {% endif %}
+
+                    {% if product.mood_trigger %}
+                    <div class="feature-title">
+                        <i class="bi bi-emoji-smile"></i>
+                        情绪触发
+                    </div>
+                    <p class="feature-content">{{ product.mood_trigger }}</p>
+                    {% endif %}
+
+                    {% if product.drinking_scenario %}
+                    <div class="feature-title">
+                        <i class="bi bi-calendar-event"></i>
+                        饮用场景
+                    </div>
+                    <p class="feature-content">{{ product.drinking_scenario }}</p>
+                    {% endif %}
+
+                    {% if product.flavor_association %}
+                    <div class="feature-title">
+                        <i class="bi bi-chat-quote"></i>
+                        味道联想
+                    </div>
+                    <p class="feature-content">{{ product.flavor_association }}</p>
+                    {% endif %}
+
+                    {% if product.origin %}
+                    <div class="feature-title">
+                        <i class="bi bi-geo-alt"></i>
+                        产地信息
+                    </div>
+                    <p class="feature-content">{{ product.origin }}</p>
+                    {% endif %}
+
+                    {% if product.specifications %}
+                    <div class="feature-title">
+                        <i class="bi bi-rulers"></i>
+                        规格参数
+                    </div>
+                    <p class="feature-content">{{ product.specifications }}</p>
+                    {% endif %}
+
+                    {% if product.suitable_crowd %}
+                    <div class="feature-title">
+                        <i class="bi bi-people"></i>
+                        适宜人群
+                    </div>
+                    <p class="feature-content">{{ product.suitable_crowd }}</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="product-features-section">
-    <div class="row">
-        <div class="col-md-6">
-            {% if product.product_features %}
-            <div class="feature-title">
-                <i class="bi bi-stars"></i>
-                产品特点
-            </div>
-            <p class="feature-content">{{ product.product_features }}</p>
-            {% endif %}
-
-            {% if product.flavor_profile %}
-            <div class="feature-title">
-                <i class="bi bi-flower1"></i>
-                风味描述
-            </div>
-            <p class="feature-content">{{ product.flavor_profile }}</p>
-            {% endif %}
-
-            {% if product.texture_description %}
-            <div class="feature-title">
-                <i class="bi bi-droplet"></i>
-                口感体验
-            </div>
-            <p class="feature-content">{{ product.texture_description }}</p>
-            {% endif %}
-
-            {% if product.objective_analysis %}
-            <div class="feature-title">
-                <i class="bi bi-graph-up"></i>
-                客观参数分析
-            </div>
-            <p class="feature-content">{{ product.objective_analysis }}</p>
-            {% endif %}
-
-            {% if product.drinking_suggestions %}
-            <div class="feature-title">
-                <i class="bi bi-cup-straw"></i>
-                科学饮用建议
-            </div>
-            <p class="feature-content">{{ product.drinking_suggestions }}</p>
-            {% endif %}
-
-            {% if product.ingredients %}
-            <div class="feature-title">
-                <i class="bi bi-list-check"></i>
-                配料表
-            </div>
-            <p class="feature-content">{{ product.ingredients }}</p>
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            {% if product.after_taste %}
-            <div class="feature-title">
-                <i class="bi bi-heart"></i>
-                回味感受
-            </div>
-            <p class="feature-content">{{ product.after_taste }}</p>
-            {% endif %}
-
-            {% if product.mood_trigger %}
-            <div class="feature-title">
-                <i class="bi bi-emoji-smile"></i>
-                情绪触发
-            </div>
-            <p class="feature-content">{{ product.mood_trigger }}</p>
-            {% endif %}
-
-            {% if product.drinking_scenario %}
-            <div class="feature-title">
-                <i class="bi bi-calendar-event"></i>
-                饮用场景
-            </div>
-            <p class="feature-content">{{ product.drinking_scenario }}</p>
-            {% endif %}
-
-            {% if product.flavor_association %}
-            <div class="feature-title">
-                <i class="bi bi-chat-quote"></i>
-                味道联想
-            </div>
-            <p class="feature-content">{{ product.flavor_association }}</p>
-            {% endif %}
-
-            {% if product.origin %}
-            <div class="feature-title">
-                <i class="bi bi-geo-alt"></i>
-                产地信息
-            </div>
-            <p class="feature-content">{{ product.origin }}</p>
-            {% endif %}
-
-            {% if product.specifications %}
-            <div class="feature-title">
-                <i class="bi bi-rulers"></i>
-                规格参数
-            </div>
-            <p class="feature-content">{{ product.specifications }}</p>
-            {% endif %}
-
-            {% if product.suitable_crowd %}
-            <div class="feature-title">
-                <i class="bi bi-people"></i>
-                适宜人群
-            </div>
-            <p class="feature-content">{{ product.suitable_crowd }}</p>
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-<div class="row mt-5">
-    <div class="col-12">
-        <h2 class="feature-title recommendation-section">
-            <i class="bi bi-gift"></i>
-            {% if current_user.is_authenticated and current_user.id % 2 == 1 %}
-            与该产品类似的还有
-            {% else %}
-            喜欢该产品的用户还喜欢
-            {% endif %}
-        </h2>
-        <div class="row mt-3">
-            {% for recommended in recommended_products %}
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
+    
+    <div class="col-md-4">
+        <div class="recommendation-sidebar">
+            <h2 class="feature-title recommendation-section">
+                <i class="bi bi-gift"></i>
+                {% if current_user.is_authenticated and current_user.id % 2 == 1 %}
+                与该产品类似的还有
+                {% else %}
+                喜欢该产品的用户还喜欢
+                {% endif %}
+            </h2>
+            <div class="recommended-products">
+                {% for recommended in recommended_products %}
+                <div class="recommended-product-card">
                     <img src="{{ recommended.image_url }}" class="card-img-top" alt="{{ recommended.name }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ recommended.name }}</h5>
-                        <p class="card-text">
-                            <small class="text-muted">类别: {{ recommended.category }}</small>
-                        </p>
-                        <p class="card-text">
-                            <strong>¥{{ "%.2f"|format(recommended.price) }}</strong>
-                        </p>
+                        <div class="product-info">
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                                <h5 class="card-title" style="margin-bottom: 0;">{{ recommended.name }}</h5>
+                                <span class="card-text"><strong>¥{{ "%.2f"|format(recommended.price) }}</strong></span>
+                            </div>
+                        </div>
                         <div class="action-buttons">
                             <a href="{{ url_for('main.product_detail', product_id=recommended.id, is_recommend='true') }}" class="btn-img">
                                 <img src="{{ url_for('static', filename='images/查看详情.png') }}" alt="查看详情">
-                                <span class="btn-text">查看详情</span>
                             </a>
                             {% if current_user.is_authenticated %}
                             <button class="btn-img add-to-cart-recommended" data-product-id="{{ recommended.id }}" data-product-name="{{ recommended.name }}" data-recommended="true">
                                 <img src="{{ url_for('static', filename='images/加入购物车.png') }}" alt="加入购物车">
-                                <span class="btn-text">加入购物车</span>
                             </button>
                             {% endif %}
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
@@ -237,7 +236,7 @@ $(document).ready(function() {
     });
 
     // 为推荐商品添加到购物车按钮添加事件处理
-    $('.card .add-to-cart-recommended').off('click').on('click', function() {
+    $('.add-to-cart-recommended').off('click').on('click', function() {
         const $btn = $(this);
         const productId = $btn.data('product-id');
         const productName = $btn.data('product-name');
